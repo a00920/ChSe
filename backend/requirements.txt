@@ -1,0 +1,22 @@
+Django
+PyStemmer
+psycopg2
+django-cors-headers
+cython
+ner
+nltk
+django-jwt-auth
+mistune
+raven
+gunicorn
+pika
+elasticsearch>=2.0.0,<3.0.0
+elasticsearch-dsl>=2.0.0,<3.0.0
+django-allauth
+ipdb
+pdbpp
+requests
+lxml
+retrying
+spacy
+deap >= 0.8

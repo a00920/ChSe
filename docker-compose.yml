@@ -1,0 +1,99 @@
+backend:
+    environment:
+        - VIRTUAL_HOST=chse.docker
+    env_file: envfile
+    stdin_open: true
+    tty: true
+    build: backend
+    links:
+        - rabbit
+        - postgres
+    volumes:
+        - ./backend:/code
+    ports:
+        - 8000
+
+data:
+    image: postgres:9.5
+    volumes:
+      - /var/lib/postgresql
+    command: "true"
+
+postgres:
+    restart: always
+    image: postgres:9.5
+    environment:
+      - PGPASSWORD=password
+    volumes_from:
+      - data
+    ports:
+      - "5432:5432"
+    env_file: envfile
+
+
+
+rabbit:
+    hostname: rabbit
+    image: rabbitmq:3.6
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=mypass
+    ports:
+      - "5672:5672"
+      - "15672:15672"  # here, we can access rabbitmq management plugin
+
+
+ner_worker:
+    env_file: envfile
+    build: backend
+    stdin_open: true
+    tty: true
+    links:
+        - rabbit
+        - postgres
+        - backend
+    volumes:
+        - ./backend:/code
+    command: ./manage.py create_ner_worker
+
+
+predicat_solver_worker:
+    env_file: envfile
+    build: backend
+    stdin_open: true
+    tty: true
+    links:
+        - rabbit
+        - postgres
+        - backend
+    volumes:
+        - ./backend:/code
+    command: ./manage.py create_predicat_solver_worker
+
+
+part_body_extractor_worker:
+    env_file: envfile
+    build: backend
+    stdin_open: true
+    tty: true
+    links:
+        - rabbit
+        - postgres
+        - backend
+    volumes:
+        - ./backend:/code
+    command: ./manage.py create_getter_part_of_body_worker
+
+
+#adjectives_extractor_worker:
+#    env_file: envfile
+#    build: backend
+#    stdin_open: true
+#    tty: true
+#    links:
+#        - rabbit
+#        - postgres
+#        - backend
+#    volumes:
+#        - ./backend:/code
+#    command: ./manage.py create_getter_part_of_body_worker

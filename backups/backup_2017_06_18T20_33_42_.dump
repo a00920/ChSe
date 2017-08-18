@@ -1,0 +1,1 @@
+pg_dump: [archiver (db)] connection to database "postgres" failed: could not translate host name "postgres" to address: Name or service not known

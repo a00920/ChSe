@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Books</title>
+</head>
+<body>
+<h1>Articles</h1>
+<ul>
+
+{% for article in object_list %}
+    <li><a href="book/{{article.id}}">
+           {{ article.name}}[{{ article.stage }}]
+        </a>
+        <a href="ner/{{article.id}}">Get Ner</a></li>
+{% empty %}
+    <li>No articles yet.</li>
+{% endfor %}
+</ul>
+</body>
+</html>

@@ -1,0 +1,1 @@
+pg_dump: [archiver (db)] connection to database "postgres" failed: FATAL:  database "postgres" does not exist

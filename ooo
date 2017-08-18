@@ -1,0 +1,14 @@
+He was human except for his crimson hair and maroon eyes.
+
+He-nsubj-> was-ROOT
+
+human-acomp-> was-ROOT
+except-prep-> was-ROOT
+for-prep-> except-prep-> except-prep-> was-ROOT
+his-poss-> hair-pobj-> hair-pobj-> for-prep-> for-prep-> except-prep-> except-prep-> was-ROOT
+crimson-amod-> hair-pobj-> hair-pobj-> for-prep-> for-prep-> except-prep-> except-prep-> was-ROOT
+hair-pobj-> for-prep-> for-prep-> except-prep-> except-prep-> was-ROOT
+and-cc-> hair-pobj-> hair-pobj-> for-prep-> for-prep-> except-prep-> except-prep-> was-ROOT
+maroon-amod-> eyes-conj-> eyes-conj-> hair-pobj-> hair-pobj-> for-prep-> for-prep-> except-prep-> except-prep-> was-ROOT
+eyes-conj-> hair-pobj-> hair-pobj-> for-prep-> for-prep-> except-prep-> except-prep-> was-ROOT
+.-punct-> was-ROOT

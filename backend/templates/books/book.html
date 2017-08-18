@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{{ book.name }}
+{% if book.stage == 3 %}
+    <h2>Update processing</h2>
+{% elif  book.stage == 2%}
+<form action="/character_confirm" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="book_id" value={{ book.id }}>
+    {% for character in book.character_set.all %}
+        <input type="checkbox" name="characters_ids" value={{ character.id }} checked="true">{{ character.name }}<Br>
+    {% endfor %}
+    <input type="submit" value="Submit" />
+    </form>
+{% elif  book.stage == 4%}
+<form action="/sex_confirm" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="book_id" value={{ book.id }}>
+    {% for character in book.character_set.all %}
+        <p>
+            {{ character.name }}
+            <input name="sex_{{ character.id }}" type="radio" value="0" {% if character.sex == 0 %} checked {% endif %}> Female
+            <input name="sex_{{ character.id }}" type="radio" value="1" {% if character.sex == 1 %} checked {% endif %}> Male
+            <input name="sex_{{ character.id }}" type="radio" value="2" {% if character.sex == 2 %} checked {% endif %}> Undefined
+        </p>
+    {% endfor %}
+    <input type="submit" value="Submit" />
+    </form>
+{% endif %}
+
+<form action="/part_body_extractor_confirm" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="book_id" value={{ book.id }}>
+    <input type="submit" value="Get parts of body" />
+</form>
+</body>
+</html>
